@@ -26,8 +26,16 @@ describe "User pages" do
     let(:submit) { "Create my account" }
 
     describe "with invalid information" do
+
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
+      end
+
+      it "should show error messages" do
+      	click_button submit
+      	expect(page).to have_content("Name can't be blank")
+      	expect(page).to have_content("Password is too short (minimum is 6 characters)")
+      	expect(page).to have_content("Email can't be blank")
       end
     end
 
