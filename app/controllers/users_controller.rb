@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	id = Integer(params[:id])
+  	id = Integer(params[:id].to_i)
   	@user = User.new
   	if id <= User.count
   		@user = User.find(params[:id])
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def index
-  	@users = User.all
+  	@users = User.paginate(page: params[:page])
   end
 
   private
